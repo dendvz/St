@@ -180,7 +180,15 @@ public:
 			}
 		}
 	}
-
+	bool check_for_solids(int x)
+	{
+		if (x < 0)
+		{
+			return false;
+		}
+		if (sol[x][x] == true)
+			return true;
+	}
 	void code_00xx_0000(std::string s, int row, int col)
 	{
 		if ((row > bmiHeader.biHeight) || (col > bmiHeader.biWidth))
