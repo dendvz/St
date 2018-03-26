@@ -2,7 +2,7 @@
 
 # include <fstream>
 # include <string>
-# include "md5\md5wrapper.h"
+// # include "md5\md5wrapper.h"
 # include "functions.h"
 
 
@@ -369,8 +369,9 @@ public:
 
 	std::string get_hash(std::string str)
 	{
-		md5wrapper md5;
-		return md5.getHashFromString(str);
+	//	md5wrapper md5;
+	//	return md5.getHashFromString(str);
+	return str;
 	}
 	int get_x(std::string s)
 	{

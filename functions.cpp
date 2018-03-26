@@ -1,4 +1,5 @@
 # include "functions.h"
+#include <cmath>
 
 JSAMPLE* image_buffer;	/* Points to large array of R,G,B-order data */
 
