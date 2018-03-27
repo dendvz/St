@@ -1,10 +1,11 @@
-#define _CRT_SECURE_NO_WARNINGS
 #ifndef JPEG_LOADER_H
 #define JPEG_LOADER_H
-# include <stdio.h>
+
+#include <stdio.h>
 #include "jpeglib.h"
 #include <setjmp.h>
 #include <stdint.h>
+
 class JpegLoader
 {
 public:
@@ -20,6 +21,7 @@ public:
 	~JpegLoader();
 
 	const ImageInfo* Load(const char* szFileName);
+        int Save(const ImageInfo* pImageInfo, const char* szFileName);
 
 private:
 	ImageInfo * m_pImageInfo;

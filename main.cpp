@@ -1,5 +1,7 @@
-# include "functions.h"
-# include "stegRGB.h"
+//# include "functions.h"
+#include "stegRGB.h"
+
+#include <iostream>
 
 int main(int argc, char* argv[])
 {
@@ -17,7 +19,7 @@ int main(int argc, char* argv[])
 			  << " nHeight = " << pImageInfo->nHeight 
 			  << " nNumComponent = " << int(pImageInfo->nNumComponent) << std::endl;
 /*
-		image_buffer = pImageInfo->pData;
+//		image_buffer = pImageInfo->pData;
 
 		RGB r(pImageInfo->nWidth, pImageInfo->nHeight, pImageInfo->nNumComponent);
 		r.into_RGB(pImageInfo->pData, pImageInfo); 
@@ -27,17 +29,22 @@ int main(int argc, char* argv[])
 
 		r.out_RGB(pImageInfo->pData);
 */
-		stbi_write_jpg("out.jpg", pImageInfo->nWidth, pImageInfo->nHeight, pImageInfo->nNumComponent, pImageInfo->pData, 100);
-		return 0;
+		if (!jpegLoader.Save(pImageInfo, "out.jpg"))
+                {
+                    std::cerr << "JpegLoader::Save failed" << std::endl;
+                    exit(1);
+                }
 		
 	}
+/*
 	const JpegLoader::ImageInfo* pImageInfo1 = jpegLoader.Load("out.jpg");
 	if (pImageInfo1)
 	{
-		image_buffer = pImageInfo1->pData;
+//		image_buffer = pImageInfo1->pData;
 		RGB r(pImageInfo1->nWidth, pImageInfo1->nHeight, pImageInfo1->nNumComponent);
 		r.into_RGB(pImageInfo1->pData, pImageInfo1);
 		std::cout << r.find_block_and_return_mes("Hello", secret) << std::endl;
 	}
+*/
 	return 0;
 }

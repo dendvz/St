@@ -1,11 +1,15 @@
-# pragma once
+#ifndef STEGRGB_H
+#define STEGRGB_H
 
-# include <fstream>
-# include <string>
+#include <fstream>
+#include <string>
+#include <cstdint>
+
+#include "rgb_structure.h"
+#include "JpegLoader.h"
+
 // # include "md5\md5wrapper.h"
-# include "functions.h"
-
-
+#include "functions.h"
 
 class RGB
 {
@@ -386,4 +390,6 @@ public:
 		}
 	}
 };
+
+#endif // STEGRGB_H
 

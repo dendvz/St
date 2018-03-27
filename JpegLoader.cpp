@@ -1,16 +1,19 @@
 #include "JpegLoader.h"
 
-JpegLoader :: JpegLoader()
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include "stb_image_write.h"
+
+JpegLoader::JpegLoader()
 {
 	m_pImageInfo = NULL;
 }
 
-JpegLoader :: ~JpegLoader()
+JpegLoader::~JpegLoader()
 {
 	Cleanup();
 }
 
-const JpegLoader :: ImageInfo* JpegLoader :: Load(const char* szFileName)
+const JpegLoader::ImageInfo* JpegLoader::Load(const char* szFileName)
 {
 	Cleanup();
 	
@@ -58,7 +61,12 @@ const JpegLoader :: ImageInfo* JpegLoader :: Load(const char* szFileName)
 	return m_pImageInfo;
 }
 
-void JpegLoader :: Cleanup()
+int JpegLoader::Save(const JpegLoader::ImageInfo* pImageInfo, const char* szFileName)
+{
+    return stbi_write_jpg(szFileName, pImageInfo->nWidth, pImageInfo->nHeight, pImageInfo->nNumComponent, pImageInfo->pData, 100);
+}
+
+void JpegLoader::Cleanup()
 {
 	if (m_pImageInfo)
 	{
@@ -68,7 +76,7 @@ void JpegLoader :: Cleanup()
 	}
 }
 
-void JpegLoader :: ErrorExit(j_common_ptr cinfo)
+void JpegLoader::ErrorExit(j_common_ptr cinfo)
 {
 	// cinfo->err is actually a pointer to my_error_mgr.defaultErrorManager, since pub
 	// is the first element of my_error_mgr we can do a sneaky cast
@@ -78,7 +86,7 @@ void JpegLoader :: ErrorExit(j_common_ptr cinfo)
 }
 
 
-void JpegLoader :: OutputMessage(j_common_ptr cinfo)
+void JpegLoader::OutputMessage(j_common_ptr cinfo)
 {
 	char buffer[JMSG_LENGTH_MAX];
 	(*cinfo->err->format_message) (cinfo, buffer);

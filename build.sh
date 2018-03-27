@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-g++ -o st main.cpp functions.cpp JpegLoader.cpp -ljpeg
+g++ -std=c++11 -o st main.cpp JpegLoader.cpp functions.cpp -ljpeg -lz
